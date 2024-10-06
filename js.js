@@ -26,22 +26,15 @@ function hideAll() {
     });
 }
 
-// // لو الامر ده مش موجود الصفحة هتيجي فاضية اول لما تفتح
-//     // وظيفة لتشغيل النقر التلقائي عند تحميل الصفحة
-//     window.onload = function() {
-//         // اختيار الزر باستخدام الـ ID الخاص به
-//         var buttonFocus = document.getElementById('autoFocus');
-//         buttonFocus.click();  // تنفيذ عملية النقر
-      
-//       };
-
 
 
 
 // إضافة حدث تحميل الصفحة
-window.addEventListener('DOMContentLoaded', hideAllExceptFeatures); // إخفاء جميع العناصر إلا قسم features عند تحميل الصفحة
+window.addEventListener('DOMContentLoaded', hideAllExceptFeatures); // إخفاء جميع العناصر features عند تحميل الصفحة
 
+// عند الضغط علي اي كلاس من الكلاسات الاساسية 
 arr.forEach((el, index) => {
+    
     el.addEventListener('click', () => {
         hideAll();  // إخفاء جميع العناصر
         resetButtonStyles();  // إعادة تنسيق الأزرار
@@ -51,16 +44,14 @@ arr.forEach((el, index) => {
         document.querySelector(`.main-content${index + 1}`).style.display = 'block';
         el.style.backgroundColor = '#005672';
         el.style.boxShadow = '0 0 10px #008CB9';
+        checkUpdateNumber()
 
-        resetProgressBar()
-        resetCounters()
-
-    
-    
-    });
-    
-    
+        resetProgressBar()   // تصفير شريط التقدم
+        resetCounters() // تصفير شريط التقدم
+    });  
 });
+
+
 
 
 
@@ -170,9 +161,8 @@ button.forEach((el) => {
     el.parentNode.style.transition = 'transform 1.3s ease-out', 'opacity 1.3s ease'; // إضافة انتقال سلس
     el.parentNode.style.transform = 'translateX(-400px) '; // تحريك العنصر لأعلى وتكبيره
     el.parentNode.style.opacity = '.4 '; // تحريك العنصر لأعلى وتكبيره
-    // شريط progress bar
-    
-    
+
+
     // إخفاء العنصر بعد انتهاء الانتقال
     setTimeout(() => {
         el.parentNode.style.display = 'none';  // إخفاء العنصر بعد 0.5 ثانية
@@ -181,14 +171,14 @@ button.forEach((el) => {
 
         }
 
-        el.style.backgroundColor = count >= 0 ? "green" : "red"; // تغيير اللون بناءً على القيمة
+        el.style.backgroundColor = count > 0 ? "green" : ""; // تغيير اللون بناءً على القيمة
       
     });
     
 
 });
 
-// دالة لإعادة تعيين العدادات وإظهار العناصر المخفية
+// دالة لإعادة تعيين العدادات وإظهار العناصر المخفية الخاصة بالازرار الداخلية
 function resetCounters() {
     button.forEach((el, index) => {
         el.innerText = originalCounts[index]; // إعادة العداد إلى قيمته الأصلية
@@ -383,7 +373,9 @@ function hideOthersAndFix(event) {
         // إخفاء العنصر إذا لم يكن هو العنصر الذي تم النقر عليه
         if (el !== event.target) {
             el.style.display = 'none';
+
         } else {
+            checkUpdateNumber()   // دالة تشيك علي التحديث
             // تثبيت العنصر في أعلى الصفحة
             el.style.position = 'fixed';
             el.style.top = '0'; // لضمان أنه سيكون في أعلى الصفحة
@@ -394,6 +386,8 @@ function hideOthersAndFix(event) {
             el.style.backgroundColor = '';
             el.style.boxShadow = '';
             document.body.style.paddingTop = '60px';
+            el.style.pointerEvents = 'none'; // تعطيل الضغط على الزر المختار في الموبايل فقط
+
         }
     });
 }
@@ -446,5 +440,17 @@ document.getElementById("menuIcon").addEventListener("click", function() {
 // --------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------
 
+ // دالة تشيك علي التحديث
+function checkUpdateNumber() {
+    if (localStorage.getItem("update") === null) { 
+        localStorage.setItem("update", 1);
+    } else if (localStorage.getItem("update") !== '1') {
+        alert("تم عمل تحديث للأصدار"); 
+        window.location.reload();
+        localStorage.setItem("update", 1);
+    
+    } 
+    
 
+}
 

@@ -18,7 +18,7 @@
     font-size: 23px;
     color: white;
     background-color: #008CB9;
-    border-radius: 10px;
+    border-radius: 5px;
     outline: none;
     border: none;
     margin: 15px 0px 0px 0px;
@@ -302,8 +302,9 @@ ul li {
     /* border-radius: 1px; */
     height: 5px;
     position: fixed;
-    top: 60px;
+    top: 0px;
     z-index: 22;
+    left: .5px;
   }
   
   .progress-bar {
