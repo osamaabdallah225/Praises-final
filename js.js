@@ -44,7 +44,8 @@ arr.forEach((el, index) => {
         document.querySelector(`.main-content${index + 1}`).style.display = 'block';
         el.style.backgroundColor = '#005672';
         el.style.boxShadow = '0 0 10px #008CB9';
-        checkUpdateNumber()
+        // checkUpdateNumber()
+        checkUpdateNumber()   // دالة تشيك علي التحديث
 
         resetProgressBar()   // تصفير شريط التقدم
         resetCounters() // تصفير شريط التقدم
@@ -386,7 +387,7 @@ function hideOthersAndFix(event) {
             el.style.backgroundColor = '';
             el.style.boxShadow = '';
             document.body.style.paddingTop = '60px';
-            el.style.pointerEvents = 'none'; // تعطيل الضغط على الزر المختار في الموبايل فقط
+            // el.style.pointerEvents = 'none'; // تعطيل الضغط على الزر المختار في الموبايل فقط
 
         }
     });
@@ -443,11 +444,11 @@ document.getElementById("menuIcon").addEventListener("click", function() {
  // دالة تشيك علي التحديث
 function checkUpdateNumber() {
     if (localStorage.getItem("update") === null) { 
-        localStorage.setItem("update", 1);
-    } else if (localStorage.getItem("update") !== '1') {
+        localStorage.setItem("update", 2);
+    } else if (localStorage.getItem("update") !== '2') {
         alert("تم عمل تحديث للأصدار"); 
         window.location.reload();
-        localStorage.setItem("update", 1);
+        localStorage.setItem("update", 2);
     
     } 
     
