@@ -17,7 +17,7 @@
     height: 60px;
     font-size: 23px;
     color: white;
-    background-color: #e9e9e9;
+    background-color: #008CB9;
     border-radius: 5px;
     outline: none;
     border: none;
@@ -68,7 +68,7 @@ font-size: 22px;
  p.p1 {
     margin-bottom: -15px;
     /* margin-top: 13px; */
-    color: #FF8000;
+    color: #ff00bf;
  }
  p {
     font-size: 25px;

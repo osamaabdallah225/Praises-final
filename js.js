@@ -443,28 +443,34 @@ document.getElementById("menuIcon").addEventListener("click", function() {
 
  // دالة تشيك علي التحديث
 
+// function checkUpdateNumber() {
+//     if (localStorage.getItem("update") === null) { 
+//         localStorage.setItem("update", 2);
+//     } else if (localStorage.getItem("update") !== '2') {
+//         alert("تم عمل تحديث للأصدار"); 
+
+//         window.location.reload();
+//         localStorage.removeItem('temporaryData');
+//         localStorage.setItem("update", 2);
+    
+//     } 
+    
+
+// }
+
+// دالة تشيك علي التحديث
+
 function checkUpdateNumber() {
-    if (localStorage.getItem("update") === null) { 
-        localStorage.setItem("update", 2);
-    } else if (localStorage.getItem("update") !== '2') {
-        alert("تم عمل تحديث للأصدار"); 
 
-        window.location.reload();
-        localStorage.removeItem('temporaryData');
-        localStorage.setItem("update", 2);
-    
-    } 
-    
-
-}
 
 // تعيين نسخة جديدة للتطبيق في localStorage
-const appVersion = '1.0.0';
+const appVersion = '1.1.0';
 const savedVersion = localStorage.getItem('appVersion');
 
 if (savedVersion !== appVersion) {
-    // إذا كانت النسخة المحفوظة مختلفة، قم بمسح الكاش المخصص للتطبيق
-    localStorage.setItem('appVersion', appVersion);
+
+    alert("تم عمل تحديث للأصدار");
+
     
     // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
     localStorage.removeItem('temporaryData');
@@ -479,8 +485,14 @@ if (savedVersion !== appVersion) {
                 });
             });
         });
+
+    // إذا كانت النسخة المحفوظة مختلفة، قم بمسح الكاش المخصص للتطبيق
+    localStorage.setItem('appVersion', appVersion);
     }
     // يمكنك إضافة أي بيانات أخرى ترغب في مسحها هنا
+}
+
+
 }
 
 
