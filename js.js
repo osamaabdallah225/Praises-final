@@ -495,40 +495,40 @@ document.getElementById("menuIcon").addEventListener("click", function() {
 function checkUpdateNumber() {
 
 
-// تعيين نسخة جديدة للتطبيق في localStorage
-const appVersion = '5.0.0';
-const savedVersion = localStorage.getItem('appVersion');
-
-if (savedVersion !== appVersion) {
-
-    // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
-    alert("تم عمل تحديث للأصدار");
-
-    // مسح الكاش
-    if ('caches' in window) {
-        caches.keys().then(function(cacheNames) {
-            const deletePromises = cacheNames.map(function(cacheName) {
-                return caches.delete(cacheName);
+    const appVersion = '1.0.0';
+    const savedVersion = localStorage.getItem('appVersion');
+    
+    if (savedVersion !== appVersion) {
+        // عرض رسالة التحديث
+        alert("تم عمل تحديث للإصدار");
+    
+        // مسح الكاش
+        if ('caches' in window) {
+            caches.keys().then(function(cacheNames) {
+                const deletePromises = cacheNames.map(function(cacheName) {
+                    return caches.delete(cacheName);
+                });
+    
+                // بعد حذف جميع الكاش، نقوم بتأخير بسيط قبل إعادة التحميل
+                Promise.all(deletePromises).then(function() {
+                    // تحديث النسخة في localStorage
+                    localStorage.setItem('appVersion', appVersion);
+    
+                    // تأخير لمدة 500ms قبل إعادة التحميل
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 500); // تأخير نصف ثانية (500ms) لضمان مسح الكاش بالكامل
+                }).catch(function(error) {
+                    console.error('Error deleting cache:', error);
+                });
             });
-
-            // بعد أن يتم حذف جميع الكاش، قم بإعادة تحميل الصفحة
-            Promise.all(deletePromises).then(function() {
-                // بعد مسح الكاش، قم بتحديث النسخة في localStorage
-                localStorage.setItem('appVersion', appVersion);
-
-                // إعادة تحميل الصفحة بعد إتمام مسح الكاش
-                window.location.reload();
-            }).catch(function(error) {
-                console.error('Error deleting cache:', error);
-            });
-        });
-    } else {
-        // إذا لم يكن الكاش مدعومًا، قم فقط بتحديث النسخة في localStorage وإعادة تحميل الصفحة
-        localStorage.setItem('appVersion', appVersion);
-        window.location.reload();
+        } else {
+            // إذا لم يكن الكاش مدعومًا، قم فقط بتحديث النسخة في localStorage وإعادة التحميل
+            localStorage.setItem('appVersion', appVersion);
+            window.location.reload();
+        }
     }
-}
-
+    
 }
 
 
