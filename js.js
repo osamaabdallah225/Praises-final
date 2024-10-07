@@ -508,6 +508,11 @@ function checkUpdateNumber() {
                 const deletePromises = cacheNames.map(function(cacheName) {
                     return caches.delete(cacheName);
                 });
+
+                fetch(window.location.href, { cache: "reload" })
+    .then(() => {
+        window.location.reload(true);
+    });
     
                 // بعد حذف جميع الكاش، نقوم بتأخير بسيط قبل إعادة التحميل
                 Promise.all(deletePromises).then(function() {
