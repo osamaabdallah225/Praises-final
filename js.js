@@ -460,81 +460,36 @@ document.getElementById("menuIcon").addEventListener("click", function() {
 
 // دالة تشيك علي التحديث
 
-// function checkUpdateNumber() {
-
-
-// // تعيين نسخة جديدة للتطبيق في localStorage
-// const appVersion = '1.0.0';
-// const savedVersion = localStorage.getItem('appVersion');
-
-// if (savedVersion !== appVersion) {
-//  // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
-//     alert("تم عمل تحديث للأصدار");
-//     window.location.reload();
-//     localStorage.removeItem('temporaryData');
-//      // مسح الكاش
-//      if ('caches' in window) {
-//         caches.keys().then(function(cacheNames) {
-//             cacheNames.forEach(function(cacheName) {
-//                 caches.delete(cacheName).then(function(success) {
-                    
-//                 });
-//             });
-//         });
-
-//     // إذا كانت النسخة المحفوظة مختلفة، قم بمسح الكاش المخصص للتطبيق
-//     localStorage.setItem('appVersion', appVersion);
-//     }
-//     // يمكنك إضافة أي بيانات أخرى ترغب في مسحها هنا
-// }
-
-
-// }
-
-
 function checkUpdateNumber() {
 
 
-    const appVersion = '1.0.0';
-    const savedVersion = localStorage.getItem('appVersion');
-    
-    if (savedVersion !== appVersion) {
-        // عرض رسالة التحديث
-        alert("تم عمل تحديث للإصدار");
-    
-        // مسح الكاش
-        if ('caches' in window) {
-            caches.keys().then(function(cacheNames) {
-                const deletePromises = cacheNames.map(function(cacheName) {
-                    return caches.delete(cacheName);
-                });
+// تعيين نسخة جديدة للتطبيق في localStorage
+const appVersion = '1.0.5';
+const savedVersion = localStorage.getItem('appVersion');
 
-                fetch(window.location.href, { cache: "reload" })
-    .then(() => {
-        window.location.reload(true);
-    });
+if (savedVersion !== appVersion) {
+ // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
+    alert("تم عمل تحديث للأصدار");
+    window.location.reload();
+    localStorage.removeItem('temporaryData');
+    localStorage.setItem('appVersion', appVersion);
+     // مسح الكاش
+    //  if ('caches' in window) {
+    //     caches.keys().then(function(cacheNames) {
+    //         cacheNames.forEach(function(cacheName) {
+    //             caches.delete(cacheName).then(function(success) {
+                    
+    //             });
+    //         });
+    //     });
+
+    // // إذا كانت النسخة المحفوظة مختلفة، قم بمسح الكاش المخصص للتطبيق
     
-                // بعد حذف جميع الكاش، نقوم بتأخير بسيط قبل إعادة التحميل
-                Promise.all(deletePromises).then(function() {
-                    // تحديث النسخة في localStorage
-                    localStorage.setItem('appVersion', appVersion);
-    
-                    // تأخير لمدة 500ms قبل إعادة التحميل
-                    setTimeout(function() {
-                        window.location.reload();
-                    }, 500); // تأخير نصف ثانية (500ms) لضمان مسح الكاش بالكامل
-                }).catch(function(error) {
-                    console.error('Error deleting cache:', error);
-                });
-            });
-        } else {
-            // إذا لم يكن الكاش مدعومًا، قم فقط بتحديث النسخة في localStorage وإعادة التحميل
-            localStorage.setItem('appVersion', appVersion);
-            window.location.reload();
-        }
-    }
-    
+    // }
+    // // يمكنك إضافة أي بيانات أخرى ترغب في مسحها هنا
 }
 
+
+}
 
 
