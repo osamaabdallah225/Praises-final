@@ -460,41 +460,76 @@ document.getElementById("menuIcon").addEventListener("click", function() {
 
 // دالة تشيك علي التحديث
 
+// function checkUpdateNumber() {
+
+
+// // تعيين نسخة جديدة للتطبيق في localStorage
+// const appVersion = '1.0.0';
+// const savedVersion = localStorage.getItem('appVersion');
+
+// if (savedVersion !== appVersion) {
+//  // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
+//     alert("تم عمل تحديث للأصدار");
+//     window.location.reload();
+//     localStorage.removeItem('temporaryData');
+//      // مسح الكاش
+//      if ('caches' in window) {
+//         caches.keys().then(function(cacheNames) {
+//             cacheNames.forEach(function(cacheName) {
+//                 caches.delete(cacheName).then(function(success) {
+                    
+//                 });
+//             });
+//         });
+
+//     // إذا كانت النسخة المحفوظة مختلفة، قم بمسح الكاش المخصص للتطبيق
+//     localStorage.setItem('appVersion', appVersion);
+//     }
+//     // يمكنك إضافة أي بيانات أخرى ترغب في مسحها هنا
+// }
+
+
+// }
+
+
 function checkUpdateNumber() {
 
 
 // تعيين نسخة جديدة للتطبيق في localStorage
-const appVersion = '1.0.0';
+const appVersion = '5.0.0';
 const savedVersion = localStorage.getItem('appVersion');
 
 if (savedVersion !== appVersion) {
 
+    // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
     alert("تم عمل تحديث للأصدار");
 
-    
-    // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
-    localStorage.removeItem('temporaryData');
-    window.location.reload();
-    localStorage.removeItem('temporaryData');
-     // مسح الكاش
-     if ('caches' in window) {
+    // مسح الكاش
+    if ('caches' in window) {
         caches.keys().then(function(cacheNames) {
-            cacheNames.forEach(function(cacheName) {
-                caches.delete(cacheName).then(function(success) {
-                    
-                });
+            const deletePromises = cacheNames.map(function(cacheName) {
+                return caches.delete(cacheName);
+            });
+
+            // بعد أن يتم حذف جميع الكاش، قم بإعادة تحميل الصفحة
+            Promise.all(deletePromises).then(function() {
+                // بعد مسح الكاش، قم بتحديث النسخة في localStorage
+                localStorage.setItem('appVersion', appVersion);
+
+                // إعادة تحميل الصفحة بعد إتمام مسح الكاش
+                window.location.reload();
+            }).catch(function(error) {
+                console.error('Error deleting cache:', error);
             });
         });
-
-    // إذا كانت النسخة المحفوظة مختلفة، قم بمسح الكاش المخصص للتطبيق
-    localStorage.setItem('appVersion', appVersion);
+    } else {
+        // إذا لم يكن الكاش مدعومًا، قم فقط بتحديث النسخة في localStorage وإعادة تحميل الصفحة
+        localStorage.setItem('appVersion', appVersion);
+        window.location.reload();
     }
-    // يمكنك إضافة أي بيانات أخرى ترغب في مسحها هنا
 }
 
-
 }
-
 
 
 
