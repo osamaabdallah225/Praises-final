@@ -444,11 +444,11 @@ document.getElementById("menuIcon").addEventListener("click", function() {
  // دالة تشيك علي التحديث
 function checkUpdateNumber() {
     if (localStorage.getItem("update") === null) { 
-        localStorage.setItem("update", 2);
-    } else if (localStorage.getItem("update") !== '2') {
+        localStorage.setItem("update", 3);
+    } else if (localStorage.getItem("update") !== '3') {
         alert("تم عمل تحديث للأصدار"); 
         window.location.reload();
-        localStorage.setItem("update", 2);
+        localStorage.setItem("update", 3);
     
     } 
     
