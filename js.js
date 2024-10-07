@@ -459,7 +459,7 @@ function checkUpdateNumber() {
 }
 
 // تعيين نسخة جديدة للتطبيق في localStorage
-const appVersion = '3.0.0';
+const appVersion = '1.0.0';
 const savedVersion = localStorage.getItem('appVersion');
 
 if (savedVersion !== appVersion) {
