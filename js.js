@@ -10,6 +10,7 @@ function hideAllExceptFeatures() {
     
 }
 
+
 // إعادة تعيين تنسيقات الأزرار إلى حالتها الافتراضية
 function resetButtonStyles() {
     arr.forEach((el) => {
@@ -46,14 +47,10 @@ arr.forEach((el, index) => {
         el.style.boxShadow = '0 0 10px #008CB9';
         // checkUpdateNumber()
         checkUpdateNumber()   // دالة تشيك علي التحديث
-
         resetProgressBar()   // تصفير شريط التقدم
-        resetCounters() // تصفير شريط التقدم
+        resetCounters() //  تصفير شريط التقدم
     });  
 });
-
-
-
 
 
 
@@ -97,11 +94,11 @@ const buttonDivs = document.querySelectorAll('.main-content1, .main-content2, .m
 
 // إعداد مصفوفة لحفظ عدد الأزرار التي وصلت إلى صفر في كل div
 let zeroCounts = Array.from(buttonDivs).map(() => 0);
-let totalButtonsInDiv = Array.from(buttonDivs).map(div => div.querySelectorAll('.button-sub').length);
+let totalButtonsInDiv = Array.from(buttonDivs).map(el => el.querySelectorAll('.button-sub').length);
 
 
-buttonDivs.forEach((div, divIndex) => {
-    const buttons = div.querySelectorAll('.button-sub');
+buttonDivs.forEach((el, divIndex) => {
+    const buttons = el.querySelectorAll('.button-sub');
 
     // إضافة حدث عند النقر على الأزرار في هذا div
     buttons.forEach(button => {
@@ -117,7 +114,10 @@ buttonDivs.forEach((div, divIndex) => {
                 if (value === 0) {
                     zeroCounts[divIndex]++; // زيادة العد في هذا div
                     calculatePercentage(divIndex); // حساب النسبة المئوية لهذا div
+                    // checkAllCountersEmpty() ;
                 }
+                
+                
             }
         });
     });
@@ -134,9 +134,37 @@ function calculatePercentage(divIndex) {
 
 // إعادة عرض شريط التقدم إلى 0%
 
+
+
+
+
+
+
+    // // دالة للتحقق مما إذا كانت جميع العدادات فارغة
+    // function checkAllCountersEmpty() {
+    //     let allEmpty ; // فرضية أن جميع العدادات فارغة
+    //     buttonDivs.forEach((el) => {
+    //         const buttons = el.querySelectorAll('.button-sub');
+    //         buttons.forEach(button => {
+    //             let value = parseInt(button.innerText);
+    //             if (value > 0) {
+    //                 allEmpty = false; // إذا وجدنا عدادًا غير فارغ، نغير الحالة
+    //             }
+    //         });
+    //     });
     
+    //     // إذا كانت جميع العدادات فارغة، نعرض رسالة
+    //     if (allEmpty === 0 ) {
+    //         alert("تم الانتهاء من القراءة");
+    //     }
+    // }
 
 
+
+
+
+
+    
 // *******************************
 // تخزين الأزرار الخاصة بالعدادات
 let button = Array.from(document.getElementsByClassName("button-sub"));
@@ -334,14 +362,10 @@ document.getElementById("theme").addEventListener("click", function() {
     document.body.classList.toggle("dark");
 })
 
-
-
 // استعادة الوضع المحفوظ من LocalStorage أو تعيين الوضع الافتراضي "light"
 let themeMode = localStorage.getItem("theme") || "light";
-
 // تطبيق الوضع المحفوظ عند تحميل الصفحة
 document.body.className = themeMode;
-
 // تفعيل زر التبديل
 document.getElementById("theme").addEventListener("click", function() {
     // تبديل السمة بين "light" و "dark"
@@ -354,22 +378,17 @@ document.getElementById("theme").addEventListener("click", function() {
     localStorage.setItem("theme", themeMode);
 });
 
-
 //  نهاية الاعدادات
 
-
-
+// وضع الموبايل على الصفحة
 
 if (window.innerWidth  < 600) {
-
 // متغير لتخزين حالة ظهور الأزرار
 let areButtonsVisible = false;
-
 // دالة لإخفاء جميع العناصر ما عدا العنصر الذي تم النقر عليه وتثبيته في أعلى الصفحة
 function hideOthersAndFix(event) {
     // التكرار عبر جميع العناصر ذات الكلاس 'main-content9'
     const allButtons = document.querySelectorAll('.main-button');
-    
     allButtons.forEach((el) => {
         // إخفاء العنصر إذا لم يكن هو العنصر الذي تم النقر عليه
         if (el !== event.target) {
@@ -388,23 +407,18 @@ function hideOthersAndFix(event) {
             el.style.boxShadow = '';
             document.body.style.paddingTop = '60px';
             // el.style.pointerEvents = 'none'; // تعطيل الضغط على الزر المختار في الموبايل فقط
-
         }
     });
 }
-
 // إضافة مستمع للأحداث لجميع العناصر التي تحتوي على الكلاس 'main-button'
 document.querySelectorAll('.main-button').forEach((el) => {
     el.addEventListener('click', hideOthersAndFix);
 });
-
 // إضافة مستمع لحدث الضغط على زر "menuIcon"
 document.getElementById("menuIcon").addEventListener("click", function() {
     // التكرار عبر جميع العناصر التي تحتوي على الكلاس 'main-button'
     const allButtons = document.querySelectorAll('.main-button');
-  
     document.body.style.paddingTop = '0px';
-
         // إذا كانت الأزرار مخفية، نقوم بإظهارها
         allButtons.forEach(function(element) {
             element.style.display = "block"; // إظهار الأزرار
@@ -418,12 +432,9 @@ document.getElementById("menuIcon").addEventListener("click", function() {
             element.style.backgroundColor = '';
             element.style.boxShadow = '';
         });
-      
-
     // تغيير الحالة
     areButtonsVisible = !areButtonsVisible;
 });
-
 
 document.getElementById("menuIcon").addEventListener("click", function() {
     document.getElementById("menuIcon").style.display = 'none';
@@ -433,8 +444,6 @@ document.getElementById("menuIcon").addEventListener("click", function() {
     });
 })
 }
-
-
 
 // --------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------
@@ -454,17 +463,14 @@ document.getElementById("menuIcon").addEventListener("click", function() {
 //         localStorage.setItem("update", 2);
     
 //     } 
-    
-
 // }
 
 // دالة تشيك علي التحديث
+// ممكن يحل محل الطريقة دي في التحديث وهي query parameters -- ?v=1.0.5">
 
 function checkUpdateNumber() {
-
-
 // تعيين نسخة جديدة للتطبيق في localStorage
-const appVersion = '1.0.2';
+const appVersion = '1.0.0';
 const savedVersion = localStorage.getItem('appVersion');
 
 if (savedVersion !== appVersion) {
@@ -475,8 +481,6 @@ if (savedVersion !== appVersion) {
     localStorage.setItem('appVersion', appVersion);  // تحديث بالقيمة الجديدة للأصدار
 
 }
-
-
 }
 
 
