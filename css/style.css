@@ -47,13 +47,17 @@
     p {
         text-align: start;
      } 
+     #finished {
+      top: 50% !important;
+      }
+
 
 }
 @media (min-width: 600px) {
     #menuIcon {
         display: none !important;
      } 
-
+   
 }
 
 .main-content1, .main-content2, .main-content3 {
@@ -181,9 +185,10 @@ h1 {
     width: 60px;
     border: none;
     text-align: center;
-    font-size: 18px;
+    font-size: 21px;
     color: rgb(255, 255, 255);
     opacity: .5;
+    font-weight: bold;
 }
 
 
@@ -313,4 +318,20 @@ ul li {
     transition: width 0.5s ease; /* انتقال سلس */
   }
   
-  
+  #finished {
+    display: none;
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #4caf50 ;
+    font-size: 25px;
+    width: 100%;
+
+  }
+
+  i.fa-face-smile {
+    color: #4caf50;
+  }
+

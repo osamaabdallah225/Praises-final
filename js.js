@@ -6,9 +6,12 @@ let mainContent = document.querySelectorAll('.main-content1, .main-content2, .ma
 function hideAllExceptFeatures() {
     mainContent.forEach((el) => {
         el.style.display = 'none';
+
+
     });
     
 }
+
 
 
 // إعادة تعيين تنسيقات الأزرار إلى حالتها الافتراضية
@@ -16,6 +19,8 @@ function resetButtonStyles() {
     arr.forEach((el) => {
         el.style.backgroundColor = '';  // إعادة لون الخلفية للحالة الافتراضية
         el.style.boxShadow = '';  // إزالة الظل
+        document.getElementById("finished").style.display = 'none';  // اخفاء رسالة الانتهاء من الذكر
+
         
     });
 }
@@ -97,6 +102,7 @@ let zeroCounts = Array.from(buttonDivs).map(() => 0);
 let totalButtonsInDiv = Array.from(buttonDivs).map(el => el.querySelectorAll('.button-sub').length);
 
 
+
 buttonDivs.forEach((el, divIndex) => {
     const buttons = el.querySelectorAll('.button-sub');
 
@@ -113,10 +119,15 @@ buttonDivs.forEach((el, divIndex) => {
                 // إذا وصلت القيمة للصفر، نزيد العداد
                 if (value === 0) {
                     zeroCounts[divIndex]++; // زيادة العد في هذا div
-                    calculatePercentage(divIndex); // حساب النسبة المئوية لهذا div
+                    calculatePercentage(divIndex);
                     // checkAllCountersEmpty() ;
                 }
-                
+                if (buttonDivs[divIndex].querySelectorAll('.button-sub').length === zeroCounts[divIndex]) {
+                    setTimeout(() => {
+                        document.getElementById("finished").style.display = 'block'; // أظهار رسالة الانتهاء من الذكر
+
+                    }, 800)
+                }
                 
             }
         });
@@ -131,6 +142,8 @@ function calculatePercentage(divIndex) {
     progressBar.style.width = percentage + '%'; // ضبط عرض شريط التقدم
     // percentageDisplay.textContent = Math.round(percentage) + '%'; // عرض النسبة المئوية
 }
+// حساب النسبة المئوية بناءً على عدد الأزرار التي وصلت إلى صفر في هذا div
+
 
 // إعادة عرض شريط التقدم إلى 0%
 
@@ -225,8 +238,6 @@ const restoreButton = document.querySelectorAll(".main-button");
 restoreButton.forEach((el) => {
     el.addEventListener('click', resetCounters);  // عند الضغط على أي زر رئيسي، يتم إعادة تعيين العدادات وإظهار العناصر المخفية
 });
-
-
 
 
 
@@ -394,6 +405,7 @@ function hideOthersAndFix(event) {
         if (el !== event.target) {
             el.style.display = 'none';
 
+
         } else {
             checkUpdateNumber()   // دالة تشيك علي التحديث
             // تثبيت العنصر في أعلى الصفحة
@@ -406,6 +418,7 @@ function hideOthersAndFix(event) {
             el.style.backgroundColor = '';
             el.style.boxShadow = '';
             document.body.style.paddingTop = '60px';
+            
             // el.style.pointerEvents = 'none'; // تعطيل الضغط على الزر المختار في الموبايل فقط
         }
     });
@@ -419,6 +432,10 @@ document.getElementById("menuIcon").addEventListener("click", function() {
     // التكرار عبر جميع العناصر التي تحتوي على الكلاس 'main-button'
     const allButtons = document.querySelectorAll('.main-button');
     document.body.style.paddingTop = '0px';
+    document.getElementById("finished").style.display = 'none';  // اخفاء رسالة الانتهاء من الذكر
+    document.getElementById("progress-container").style.display = 'none';  // إخفاء شريط التقديم   
+
+
         // إذا كانت الأزرار مخفية، نقوم بإظهارها
         allButtons.forEach(function(element) {
             element.style.display = "block"; // إظهار الأزرار
@@ -470,12 +487,12 @@ document.getElementById("menuIcon").addEventListener("click", function() {
 
 function checkUpdateNumber() {
 // تعيين نسخة جديدة للتطبيق في localStorage
-const appVersion = '1.0.0';
+const appVersion = '1.1.0';
 const savedVersion = localStorage.getItem('appVersion');
 
 if (savedVersion !== appVersion) {
  // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
-    alert("تم عمل تحديث للأصدار");
+    // alert("تم عمل تحديث للأصدار");
     window.location.reload();
     localStorage.removeItem('temporaryData');
     localStorage.setItem('appVersion', appVersion);  // تحديث بالقيمة الجديدة للأصدار
