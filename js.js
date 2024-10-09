@@ -487,7 +487,7 @@ document.getElementById("menuIcon").addEventListener("click", function() {
 
 function checkUpdateNumber() {
 // تعيين نسخة جديدة للتطبيق في localStorage
-const appVersion = '1.1.0';
+const appVersion = '1.2.0';
 const savedVersion = localStorage.getItem('appVersion');
 
 if (savedVersion !== appVersion) {
