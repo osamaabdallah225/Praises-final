@@ -1,6 +1,6 @@
 // تحويل الأزرار إلى مصفوفة
 let arr = Array.from(document.getElementsByClassName('main-button'));     // الكلاس الاساسي main-button
-let mainContent = document.querySelectorAll('.main-content1, .main-content2, .main-content3, .main-content4, .main-content5, .main-content6, .main-content7, .main-content8, .main-content9');
+let mainContent = document.querySelectorAll('.main-content1, .main-content2, .main-content3, .main-content4, .main-content5, .main-content6, .main-content7, .main-content8, .main-content9, .main-content10');
 // الكاسات الاساسية اللي بداخل كلاس main-button
 // إخفاء جميع العناصر عند فتح البرنامج  
 function hideAllExceptFeatures() {
@@ -11,8 +11,6 @@ function hideAllExceptFeatures() {
     });
     
 }
-
-
 
 // إعادة تعيين تنسيقات الأزرار إلى حالتها الافتراضية
 function resetButtonStyles() {
@@ -145,38 +143,6 @@ function calculatePercentage(divIndex) {
 // حساب النسبة المئوية بناءً على عدد الأزرار التي وصلت إلى صفر في هذا div
 
 
-// إعادة عرض شريط التقدم إلى 0%
-
-
-
-
-
-
-
-    // // دالة للتحقق مما إذا كانت جميع العدادات فارغة
-    // function checkAllCountersEmpty() {
-    //     let allEmpty ; // فرضية أن جميع العدادات فارغة
-    //     buttonDivs.forEach((el) => {
-    //         const buttons = el.querySelectorAll('.button-sub');
-    //         buttons.forEach(button => {
-    //             let value = parseInt(button.innerText);
-    //             if (value > 0) {
-    //                 allEmpty = false; // إذا وجدنا عدادًا غير فارغ، نغير الحالة
-    //             }
-    //         });
-    //     });
-    
-    //     // إذا كانت جميع العدادات فارغة، نعرض رسالة
-    //     if (allEmpty === 0 ) {
-    //         alert("تم الانتهاء من القراءة");
-    //     }
-    // }
-
-
-
-
-
-
     
 // *******************************
 // تخزين الأزرار الخاصة بالعدادات
@@ -290,7 +256,26 @@ document.getElementById("icon").addEventListener("click", function() {
     buttons[buttons.length - 1].style.backgroundColor = "#018BBA"; // إعادة لون الزر الافتراضي
 });
 
+// *********************************************************
+// اظهار واخفاء التول تب عند الضغط علي الايقونة
 
+document.querySelectorAll(".tooltip").forEach((el) => {
+    el.addEventListener("click", function() {
+        // ابحث عن العنصر .tooltiptext داخل العنصر الذي تم النقر عليه
+        const tooltipText = el.querySelector(".tooltiptext");
+        
+        // إذا كانت العنصر .tooltiptext مخفية، اجعلها مرئية
+        if (tooltipText.style.display === "none" || tooltipText.style.display === "") {
+            tooltipText.style.display = "block";
+        } else {
+            // إذا كانت مرئية بالفعل، اخفيها
+            tooltipText.style.display = "none";
+        }
+    });
+});
+
+
+// *********************************************************
 //  الاعدادت
 
 
@@ -389,6 +374,59 @@ document.getElementById("theme").addEventListener("click", function() {
     localStorage.setItem("theme", themeMode);
 });
 
+// *********************************
+
+// bold text for paragraphs
+
+
+
+// عند تحميل الصفحة، تحقق من localStorage
+// عند تحميل الصفحة، تحقق من localStorage
+window.addEventListener("load", function() {
+    // إذا كانت القيمة غير موجودة في localStorage أو كانت "false"، تطبيق الخط العريض كإعداد افتراضي
+    let isBold = localStorage.getItem("bold") === "true" || localStorage.getItem("bold") === null; // إذا كانت null أو true
+
+    let elements = Array.from(document.getElementsByTagName("p")); // الحصول على جميع عناصر <p>
+
+    // إذا كانت القيمة مخزنة بـ "true" أو إذا كانت null (إعداد افتراضي)، نطبق الخط العريض
+    if (isBold) {
+        elements.forEach(el => {
+            el.style.fontWeight = "bold";
+        });
+    } else {
+        // إذا كانت القيمة "false"، نطبق الخط العادي
+        elements.forEach(el => {
+            el.style.fontWeight = "normal";
+        });
+    }
+});
+
+// عند النقر على الزر لتبديل الحالة
+document.getElementById("bold").addEventListener("click", function() {
+    let elements = Array.from(document.getElementsByTagName("p")); // الحصول على جميع عناصر <p>
+    let isBold = false;  // نبدأ في حالة أن النصوص ليست عريضة
+
+    elements.forEach(el => {
+        // استخدام getComputedStyle للحصول على الوزن الفعلي للخط
+        let currentFontWeight = window.getComputedStyle(el).fontWeight;
+
+        // تحقق من ما إذا كان الخط عريضًا باستخدام قيم مختلفة
+        if (currentFontWeight === "bold" || currentFontWeight === "700") {
+            el.style.fontWeight = "normal"; // إذا كان عريضًا، غيره إلى عادي
+        } else {
+            el.style.fontWeight = "bold"; // إذا كان عاديًا، اجعل الخط عريضًا
+            isBold = true; // حافظ على حالة أن الخط أصبح عريضًا
+        }
+    });
+
+    // حفظ الحالة الحالية في localStorage (true إذا تم تطبيق bold، false إذا لم يتم تطبيقه)
+    localStorage.setItem("bold", isBold ? "true" : "false");
+});
+
+
+// **********************************
+
+
 //  نهاية الاعدادات
 
 // وضع الموبايل على الصفحة
@@ -433,7 +471,8 @@ document.getElementById("menuIcon").addEventListener("click", function() {
     const allButtons = document.querySelectorAll('.main-button');
     document.body.style.paddingTop = '0px';
     document.getElementById("finished").style.display = 'none';  // اخفاء رسالة الانتهاء من الذكر
-    document.getElementById("progress-container").style.display = 'none';  // إخفاء شريط التقديم   
+    document.getElementById("progress-container").style.display = 'none';  // إخفاء شريط التقديم 
+    hideAll()  
 
 
         // إذا كانت الأزرار مخفية، نقوم بإظهارها
@@ -487,12 +526,12 @@ document.getElementById("menuIcon").addEventListener("click", function() {
 
 function checkUpdateNumber() {
 // تعيين نسخة جديدة للتطبيق في localStorage
-const appVersion = '1.2.0';
+const appVersion = '1.3.0';
 const savedVersion = localStorage.getItem('appVersion');
 
 if (savedVersion !== appVersion) {
  // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
-    // alert("تم عمل تحديث للأصدار");
+    alert("تم عمل تحديث للأصدار");
     window.location.reload();
     localStorage.removeItem('temporaryData');
     localStorage.setItem('appVersion', appVersion);  // تحديث بالقيمة الجديدة للأصدار
