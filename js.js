@@ -526,12 +526,12 @@ document.getElementById("menuIcon").addEventListener("click", function() {
 
 function checkUpdateNumber() {
 // تعيين نسخة جديدة للتطبيق في localStorage
-const appVersion = '1.3.0';
+const appVersion = '1.4.0';
 const savedVersion = localStorage.getItem('appVersion');
 
 if (savedVersion !== appVersion) {
  // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
-    alert("تم عمل تحديث للأصدار");
+    // alert("تم عمل تحديث للأصدار");
     window.location.reload();
     localStorage.removeItem('temporaryData');
     localStorage.setItem('appVersion', appVersion);  // تحديث بالقيمة الجديدة للأصدار
