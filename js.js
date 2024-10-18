@@ -9,7 +9,7 @@ function hideAllExceptFeatures() {
 
 
     });
-    
+
 }
 
 // إعادة تعيين تنسيقات الأزرار إلى حالتها الافتراضية
@@ -19,7 +19,7 @@ function resetButtonStyles() {
         el.style.boxShadow = '';  // إزالة الظل
         document.getElementById("finished").style.display = 'none';  // اخفاء رسالة الانتهاء من الذكر
 
-        
+
     });
 }
 
@@ -38,12 +38,12 @@ window.addEventListener('DOMContentLoaded', hideAllExceptFeatures); // إخفا�
 
 // عند الضغط علي اي كلاس من الكلاسات الاساسية 
 arr.forEach((el, index) => {
-    
+
     el.addEventListener('click', () => {
         hideAll();  // إخفاء جميع العناصر
         resetButtonStyles();  // إعادة تنسيق الأزرار
         document.getElementById("menuIcon").style.display = 'block';
-       
+
         // إظهار العنصر المطلوب بناءً على الزر
         document.querySelector(`.main-content${index + 1}`).style.display = 'block';
         el.style.backgroundColor = '#005672';
@@ -52,7 +52,7 @@ arr.forEach((el, index) => {
         checkUpdateNumber()   // دالة تشيك علي التحديث
         resetProgressBar()   // تصفير شريط التقدم
         resetCounters() //  تصفير شريط التقدم
-    });  
+    });
 });
 
 
@@ -67,11 +67,11 @@ arr.forEach((el, index) => {
 function resetProgressBar() {
     const progressBar = document.getElementById("progress-bar");
     const percentageDisplay = document.getElementById("percentage");
-    
+
     document.getElementById("progress-container").style.display = 'none';  // إخفاء الحاوية إذا كانت ظاهرة
     progressBar.style.width = '0%';  // إعادة عرض شريط التقدم إلى 0%
-    
-    
+
+
     // إعادة تعيين العدادات
     zeroCounts = Array.from(buttonDivs).map(() => 0); // إعادة تعيين العدادات لكل div
 }
@@ -79,8 +79,8 @@ function resetProgressBar() {
 // دالة لإعادة تعيين العدادات وإظهار العناصر المخفية
 function resetCounters() {
     button.forEach((el, index) => {
-    el.innerText = originalCounts[index]; // إعادة العداد إلى قيمته الأصلية
-       
+        el.innerText = originalCounts[index]; // إعادة العداد إلى قيمته الأصلية
+
     });
 }
 
@@ -126,7 +126,7 @@ buttonDivs.forEach((el, divIndex) => {
 
                     }, 800)
                 }
-                
+
             }
         });
     });
@@ -143,7 +143,7 @@ function calculatePercentage(divIndex) {
 // حساب النسبة المئوية بناءً على عدد الأزرار التي وصلت إلى صفر في هذا div
 
 
-    
+
 // *******************************
 // تخزين الأزرار الخاصة بالعدادات
 let button = Array.from(document.getElementsByClassName("button-sub"));
@@ -156,33 +156,33 @@ button.forEach((el) => {
     originalCounts.push(parseInt(el.innerText)); // حفظ القيمة الأصلية للعداد
 
     el.addEventListener('click', () => {
-      
+
         let count = parseInt(el.innerText);  // أخذ القيمة الحالية
         if (count > 0) {
             el.innerText = count;  // تحديث النص
 
         }
 
-   
+
         // إخفاء العنصر إذا وصل العداد إلى 0
         if (count <= 0) {
-    el.parentNode.style.transition = 'transform 1.3s ease-out', 'opacity 1.3s ease'; // إضافة انتقال سلس
-    el.parentNode.style.transform = 'translateX(-400px) '; // تحريك العنصر لأعلى وتكبيره
-    el.parentNode.style.opacity = '.4 '; // تحريك العنصر لأعلى وتكبيره
+            el.parentNode.style.transition = 'transform 1.3s ease-out', 'opacity 1.3s ease'; // إضافة انتقال سلس
+            el.parentNode.style.transform = 'translateX(-400px) '; // تحريك العنصر لأعلى وتكبيره
+            el.parentNode.style.opacity = '.4 '; // تحريك العنصر لأعلى وتكبيره
 
 
-    // إخفاء العنصر بعد انتهاء الانتقال
-    setTimeout(() => {
-        el.parentNode.style.display = 'none';  // إخفاء العنصر بعد 0.5 ثانية
-    }, 800); // نفس مدة الانتقال
-           
+            // إخفاء العنصر بعد انتهاء الانتقال
+            setTimeout(() => {
+                el.parentNode.style.display = 'none';  // إخفاء العنصر بعد 0.5 ثانية
+            }, 800); // نفس مدة الانتقال
+
 
         }
 
         el.style.backgroundColor = count > 0 ? "green" : ""; // تغيير اللون بناءً على القيمة
-      
+
     });
-    
+
 
 });
 
@@ -193,84 +193,98 @@ function resetCounters() {
         el.style.backgroundColor = "";  // إعادة لون الخلفية إلى الحالة الافتراضية
         el.parentNode.style.display = 'block';  // إظهار العنصر المخفي
         el.parentNode.style.transition = "none"; // إضافة انتقال سلس
-       el.parentNode.style.transform = "none"; // تحريك العنصر لأعلى وتكبيره
-       el.parentNode.style.opacity = "";
-    
+        el.parentNode.style.transform = "none"; // تحريك العنصر لأعلى وتكبيره
+        el.parentNode.style.opacity = "";
+
     });
 }
 
 // إضافة زر لإعادة تعيين العدادات وإظهار العناصر المخفية عند الضغط على الأزرار الرئيسية
-const restoreButton = document.querySelectorAll(".main-button"); 
+const restoreButton = document.querySelectorAll(".main-button");
 restoreButton.forEach((el) => {
     el.addEventListener('click', resetCounters);  // عند الضغط على أي زر رئيسي، يتم إعادة تعيين العدادات وإظهار العناصر المخفية
 });
 
 
+//  الجزء الخاص بالتسابيح
 
+const circles = document.querySelectorAll('.circles');   // تعريف الدواير (الاذكار)
+const counters = document.querySelectorAll('.counter');  // تعريف العداد
+const img = document.querySelectorAll('.img');           // تعريف الصور اللي هتظهر داخل الدايرة لما تكبر
+const totalCounter = document.querySelector('.total-counter');  // العداد التوتال
+let counts = Array(circles.length).fill(0); // Array to store counts for each circle
+let totalCount = 0; // Total count
 
-// تعريف الأزرار والعدادات-- الجزء الخاص بالتسابيح
+// عندما يتم النقر على زر العودة
+document.getElementById('back-circle').addEventListener('click', () => {
+document.getElementById('back-circle').classList.add('disactive');   // اخفاء زر العودة
+document.getElementById("icon").style.display = "block";  // اظهار ايقونة التصفير 
+});
 
-const buttons = document.querySelectorAll('.button-all'); // جميع الأزرار
-const spans = document.querySelectorAll('.block-all'); // جميع العناصر التي ستعرض العدادات
-let counts = Array(buttons.length).fill(0); // مصفوفة لتخزين العدادات لكل زر
-let totalCount = 0; // العد الكلي
+// إضافة مستمعات الضغط على الدوائر
+circles.forEach((circle, index) => {
+    circle.addEventListener('click', () => {
+        // إذا كانت الدائرة غير نشطة (صغيرة)، قم بتكبيرها فقط
+        if (!circle.classList.contains('active')) {
+            // إزالة الكلاس 'active' من جميع الدوائر الأخرى
+            // circles.forEach(c => c.classList.remove('active'));
 
-// دالة لزيادة العداد عند النقر على زر
-function handleButtonClick(index) {
-    counts[index]++; // زيادة العداد الخاص بالزر
+            // إضافة الكلاس 'active' لهذه الدائرة لجعلها كبيرة
+            circle.classList.add('active');
+
+            // إخفاء جميع الصور أولاً
+            img.forEach(i => i.style.display = "none");
+
+            // عرض الصورة الخاصة بهذه الدائرة
+            if (img[index]) {
+                img[index].style.display = "block";
+            }
+
+            // جعل زر الرجوع مرئي
+            document.getElementById('back-circle').classList.remove('disactive');
+            document.getElementById("icon").style.display = "none";  // اخفاء ايقونة التصفير
+        } else {
+            // إذا كانت الدائرة نشطة (كبرت)، زيادة العداد
+            ButtonClick(index); // زيادة العداد فقط إذا كانت نشطة
+        }
+    });
+});
+
+// دالة لزيادة العداد
+function ButtonClick(index) {
+    counts[index]++; // زيادة العداد لهذه الدائرة
     totalCount++; // زيادة العد الكلي
 
-    // تحديث النصوص في العناصر المناسبة
-    spans[index].innerText = counts[index];
-    spans[spans.length - 1].innerText = totalCount; // تحديث مجموع التسبيحات
+    // تحديث العداد الفردي في الـ DOM
+    counters[index].innerText = counts[index];
 
-    // تغيير لون الزر
-    buttons[index].style.backgroundColor = "#4CB050";
-
-    // تعطيل الزر إذا وصل إلى 100
-    if (counts[index] >= 100) {
-        buttons[index].style.backgroundColor = "#958774"; // تغيير اللون
-        // buttons[index].disabled = true; // تعطيل الزر
-    }
+    // تحديث العد الكلي في الـ DOM
+    totalCounter.innerText = totalCount;
 }
 
-// إضافة الأحداث لكل زر
-buttons.forEach((button, index) => {
-    button.addEventListener("click", () => handleButtonClick(index));
+// دالة لإعادة تعيين الدوائر عندما يتم النقر على زر 'back-circle'
+document.getElementById('back-circle').addEventListener('click', () => {
+    circles.forEach(c => c.classList.remove('active')); // إزالة الكلاس 'active' من جميع الدوائر
+    img.forEach(i => i.style.display = "none"); // إخفاء جميع الصور
 });
 
-// دالة لإعادة القيم إلى حالتها الافتراضية
-document.getElementById("icon").addEventListener("click", function() {
+// دالة لإعادة القيم إلى حالتها الافتراضية عند الضغط على زر إعادة التعيين
+document.getElementById("icon").addEventListener("click", function () {
     counts.fill(0); // إعادة جميع العدادات إلى 0
     totalCount = 0; // إعادة العد الكلي إلى 0
+    totalCounter.innerText = 0;
 
-    // إعادة تعيين النصوص والألوان
-    spans.forEach((span, index) => {
-        span.innerText = ""; // إعادة النص إلى فارغ
-        buttons[index].style.backgroundColor = "#FF9700"; // إعادة لون الزر إلى الافتراضي
-        buttons[index].disabled = false; // إعادة تفعيل الزر
+    // إعادة تعيين النصوص
+    counters.forEach((span) => {
+        span.innerText = "0"; // إعادة النص إلى فارغ
     });
 
-    // تحديث مجموع التسبيحات
-    spans[spans.length - 1].innerText = ""; // إعادة مجموع التسبيحات إلى فارغ
-    buttons[buttons.length - 1].style.backgroundColor = "#018BBA"; // إعادة لون الزر الافتراضي
-});
+    // إخفاء جميع الصور بعد إعادة التعيين
+    img.forEach(i => i.style.display = "none");
 
-// *********************************************************
-// اظهار واخفاء التول تب عند الضغط علي الايقونة
-
-document.querySelectorAll(".tooltip").forEach((el) => {
-    el.addEventListener("click", function() {
-        // ابحث عن العنصر .tooltiptext داخل العنصر الذي تم النقر عليه
-        const tooltipText = el.querySelector(".tooltiptext");
-        
-        // إذا كانت العنصر .tooltiptext مخفية، اجعلها مرئية
-        if (tooltipText.style.display === "none" || tooltipText.style.display === "") {
-            tooltipText.style.display = "block";
-        } else {
-            // إذا كانت مرئية بالفعل، اخفيها
-            tooltipText.style.display = "none";
-        }
+    // إعادة تعيين الدوائر إلى حالتها الأصلية
+    circles.forEach(c => {
+        c.classList.remove('active');
     });
 });
 
@@ -282,20 +296,20 @@ document.querySelectorAll(".tooltip").forEach((el) => {
 let fontSize = localStorage.getItem("fontSize") ? parseInt(localStorage.getItem("fontSize")) : 25; // استعادة الحجم المحفوظ أو تعيين الحجم الافتراضي
 
 // استعادة حجم الخط عند تحميل الصفحة
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
     let elements = Array.from(document.getElementsByTagName("p")); // الحصول على جميع عناصر <p>
     elements.forEach(el => {
         el.style.fontSize = fontSize + "px"; // تعيين حجم الخط المحفوظ
     });
 
-        // التحقق من تعطيل الأزرار بعد التغيير
+    // التحقق من تعطيل الأزرار بعد التغيير
     checkButtonState();
 });
 
 
 
 // زر التكبير
-document.getElementById("plus").addEventListener("click", function() {
+document.getElementById("plus").addEventListener("click", function () {
     if (fontSize < 60) { // تحقق من عدم تجاوز الحد الأقصى
         fontSize += 2; // زيادة حجم الخط بمقدار 2
         let elements = Array.from(document.getElementsByTagName("p")); // الحصول على جميع عناصر <p>
@@ -315,14 +329,14 @@ document.getElementById("plus").addEventListener("click", function() {
 });
 
 // زر التصغير
-document.getElementById("minus").addEventListener("click", function() {
+document.getElementById("minus").addEventListener("click", function () {
     if (fontSize > 16) { // تحقق من عدم تجاوز الحد الأدنى
         fontSize -= 2; // تقليل حجم الخط بمقدار 2
         let elements = Array.from(document.getElementsByTagName("p")); // الحصول على جميع عناصر <p>
 
         // تعديل حجم الخط لكل عنصر <p> مع التأكد من أن الحجم لا يقل عن 10px
         elements.forEach(el => {
-            el.style.fontSize =  fontSize + "px";
+            el.style.fontSize = fontSize + "px";
         });
 
         // حفظ حجم الخط في Local Storage
@@ -335,7 +349,7 @@ document.getElementById("minus").addEventListener("click", function() {
     }
 });
 
- document.getElementById("seeFont").innerHTML =   fontSize + "px";
+document.getElementById("seeFont").innerHTML = fontSize + "px";
 // دالة للتحقق من حالة الأزرار
 
 function checkButtonState() {
@@ -354,7 +368,7 @@ function checkButtonState() {
 
 
 
-document.getElementById("theme").addEventListener("click", function() {
+document.getElementById("theme").addEventListener("click", function () {
     document.body.classList.toggle("dark");
 })
 
@@ -363,13 +377,13 @@ let themeMode = localStorage.getItem("theme") || "light";
 // تطبيق الوضع المحفوظ عند تحميل الصفحة
 document.body.className = themeMode;
 // تفعيل زر التبديل
-document.getElementById("theme").addEventListener("click", function() {
+document.getElementById("theme").addEventListener("click", function () {
     // تبديل السمة بين "light" و "dark"
     themeMode = themeMode === "light" ? "dark" : "light";
-    
+
     // تطبيق السمة الجديدة
     document.body.className = themeMode;
-    
+
     // حفظ السمة الجديدة في LocalStorage
     localStorage.setItem("theme", themeMode);
 });
@@ -382,7 +396,7 @@ document.getElementById("theme").addEventListener("click", function() {
 
 // عند تحميل الصفحة، تحقق من localStorage
 // عند تحميل الصفحة، تحقق من localStorage
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
     // إذا كانت القيمة غير موجودة في localStorage أو كانت "false"، تطبيق الخط العريض كإعداد افتراضي
     let isBold = localStorage.getItem("bold") === "true" || localStorage.getItem("bold") === null; // إذا كانت null أو true
 
@@ -402,7 +416,7 @@ window.addEventListener("load", function() {
 });
 
 // عند النقر على الزر لتبديل الحالة
-document.getElementById("bold").addEventListener("click", function() {
+document.getElementById("bold").addEventListener("click", function () {
     let elements = Array.from(document.getElementsByTagName("p")); // الحصول على جميع عناصر <p>
     let isBold = false;  // نبدأ في حالة أن النصوص ليست عريضة
 
@@ -436,25 +450,25 @@ document.getElementById("bold").addEventListener("click", function() {
 // ********************
 // ********************
 
-if (window.innerWidth  < 600) {
+if (window.innerWidth < 600) {
     // متغير لتخزين حالة ظهور الأزرار
     // let areButtonsVisible = false;
     // دالة لإخفاء جميع العناصر ما عدا العنصر الذي تم النقر عليه وتثبيته في أعلى الصفحة
     let activeButtonIndex = -1; // لحفظ الزر النشط
     let isButtonActive = true; // حالة الزر (مفعل أو غير مفعل)
-    
+
     function hideOthersAndFix(event) {
         const allButtons = document.querySelectorAll('.main-button');
-    
+
         allButtons.forEach((el, index) => {
             // إخفاء العنصر إذا لم يكن هو العنصر الذي تم النقر عليه
             if (el !== event.target) {
                 el.style.display = 'none';
-                
+
             } else {
                 if (isButtonActive) {
                     checkUpdateNumber(); // دالة تشيك علي التحديث
-    
+
                     // تثبيت العنصر في أعلى الصفحة
                     el.style.position = 'fixed';
                     el.style.top = '0px';
@@ -470,90 +484,90 @@ if (window.innerWidth  < 600) {
                     document.body.style.paddingTop = '60px';
 
 
-                    
-         
-                   
+
+
+
                 }
             }
         });
     }
-    
 
-// إضافة مستمع للأحداث لجميع العناصر التي تحتوي على الكلاس 'main-button'
-document.querySelectorAll('.main-button').forEach((el) => {
-    el.addEventListener('click', hideOthersAndFix);
-});
 
-// **********************************************************************
-
-//عند الضغط علي menuIcon 
-// إضافة مستمع لحدث الضغط على زر "menuIcon"
-// تعريف متغير لتتبع النقر على الأزرار الفرعية button-sub
-let actionOccurredOnSubButton = false;
-
-// إضافة مستمع للنقر على الأزرار داخل main-content1 و main-content2
-document.querySelectorAll('.button-sub').forEach(function(button) {
-    button.addEventListener('click', function() {
-        actionOccurredOnSubButton = true; // تم النقر على زر من الفئة button-sub
+    // إضافة مستمع للأحداث لجميع العناصر التي تحتوي على الكلاس 'main-button'
+    document.querySelectorAll('.main-button').forEach((el) => {
+        el.addEventListener('click', hideOthersAndFix);
     });
-});
 
-// إضافة مستمع لحدث الضغط على زر "menuIcon"
-document.getElementById("menuIcon").addEventListener("click", function() {
-    document.getElementById("menuIcon").style.display = 'none';
-// نتحقق إذا كانت الأذكار قد انتهت
-    const finished = document.getElementById("finished").style.display !== 'none'; 
-    // نتحقق مما إذا حدث أي نشاط على زر من الفئة button-sub
-    const noActionOccurred = !actionOccurredOnSubButton; // إذا لم يتم النقر على أي زر من فئة button-sub
+    // **********************************************************************
 
-    // إذا لم يحدث أي نشاط على الأزرار الفرعية يتم الخروج مباشرة بدون رسالة
-    if (noActionOccurred || finished) {
-        exitWithoutConfirmation();
-    } else {
-        // إذا تم النقر على زر من فئة button-sub، نسأل المستخدم ما إذا كان يريد الخروج
-        const userConfirmed = confirm("تم البدء في قراءة الذكر. هل تريد الخروج ؟");
-        if (userConfirmed === true) {
+    //عند الضغط علي menuIcon 
+    // إضافة مستمع لحدث الضغط على زر "menuIcon"
+    // تعريف متغير لتتبع النقر على الأزرار الفرعية button-sub
+    let actionOccurredOnSubButton = false;
+
+    // إضافة مستمع للنقر على الأزرار داخل main-content1 و main-content2
+    document.querySelectorAll('.button-sub').forEach(function (button) {
+        button.addEventListener('click', function () {
+            actionOccurredOnSubButton = true; // تم النقر على زر من الفئة button-sub
+        });
+    });
+
+    // إضافة مستمع لحدث الضغط على زر "menuIcon"
+    document.getElementById("menuIcon").addEventListener("click", function () {
+        document.getElementById("menuIcon").style.display = 'none';
+        // نتحقق إذا كانت الأذكار قد انتهت
+        const finished = document.getElementById("finished").style.display !== 'none';
+        // نتحقق مما إذا حدث أي نشاط على زر من الفئة button-sub
+        const noActionOccurred = !actionOccurredOnSubButton; // إذا لم يتم النقر على أي زر من فئة button-sub
+
+        // إذا لم يحدث أي نشاط على الأزرار الفرعية يتم الخروج مباشرة بدون رسالة
+        if (noActionOccurred || finished) {
             exitWithoutConfirmation();
         } else {
-            // إعادة عرض القائمة إذا لم يؤكد المستخدم الخروج
-            document.getElementById("menuIcon").style.display = 'block';
+            // إذا تم النقر على زر من فئة button-sub، نسأل المستخدم ما إذا كان يريد الخروج
+            const userConfirmed = confirm("تم البدء في قراءة الذكر. هل تريد الخروج ؟");
+            if (userConfirmed === true) {
+                exitWithoutConfirmation();
+            } else {
+                // إعادة عرض القائمة إذا لم يؤكد المستخدم الخروج
+                document.getElementById("menuIcon").style.display = 'block';
+            }
         }
-    }
-});
-
-// دالة لتنفيذ الخروج بدون رساله تأكيد
-function exitWithoutConfirmation() {
-    const allButtons = document.querySelectorAll('.main-button');
-    document.body.style.paddingTop = '0px';
-    document.getElementById("finished").style.display = 'none'; // اخفاء رسالة الانتهاء من الذكر
-    document.getElementById("progress-container").style.display = 'none'; // إخفاء شريط التقديم 
-    // عند الصغط علي الاسقوتة هيتم الذهاب الي اعلي الصفحة
-    window.scrollTo({
-                top: 0,
-                behavior: 'smooth' // للتأكد من أن التمرير سلس (اختياري)
-            });
-            // اخفاء جميع عناصر main-content1 , 2 , .........
-    hideAll();
-
-    // إذا كانت الأزرار مخفية، نقوم بإظهارها
-    allButtons.forEach(function(element) {
-        element.style.display = "block"; // إظهار الأزرار
-        // إعادة وضع الزر الذي تم تثبيته إلى الوضع العادي
-        element.style.position = '';
-        element.style.top = '';
-        element.style.left = '';
-        element.style.transform = '';
-        element.style.zIndex = '';
-        element.style.margin = '';
-        element.style.pointerEvents = 'auto'; // إعادة تفعيل الضغط على الزر
     });
 
-    isButtonActive = true; // إعادة تفعيل الزر
+    // دالة لتنفيذ الخروج بدون رساله تأكيد
+    function exitWithoutConfirmation() {
+        const allButtons = document.querySelectorAll('.main-button');
+        document.body.style.paddingTop = '0px';
+        document.getElementById("finished").style.display = 'none'; // اخفاء رسالة الانتهاء من الذكر
+        document.getElementById("progress-container").style.display = 'none'; // إخفاء شريط التقديم 
+        // عند الصغط علي الاسقوتة هيتم الذهاب الي اعلي الصفحة
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // للتأكد من أن التمرير سلس (اختياري)
+        });
+        // اخفاء جميع عناصر main-content1 , 2 , .........
+        hideAll();
 
-    // إعادة تعيين حالة النقر على الأزرار
-    actionOccurredOnSubButton = false;
+        // إذا كانت الأزرار مخفية، نقوم بإظهارها
+        allButtons.forEach(function (element) {
+            element.style.display = "block"; // إظهار الأزرار
+            // إعادة وضع الزر الذي تم تثبيته إلى الوضع العادي
+            element.style.position = '';
+            element.style.top = '';
+            element.style.left = '';
+            element.style.transform = '';
+            element.style.zIndex = '';
+            element.style.margin = '';
+            element.style.pointerEvents = 'auto'; // إعادة تفعيل الضغط على الزر
+        });
+
+        isButtonActive = true; // إعادة تفعيل الزر
+
+        // إعادة تعيين حالة النقر على الأزرار
+        actionOccurredOnSubButton = false;
+    }
 }
-}
 
 
 
@@ -562,8 +576,8 @@ function exitWithoutConfirmation() {
 // --------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------
 
- // دالة تشيك علي التحديث
- // كود قديم اللي تحت افضل منه هي نفش الفكرة
+// دالة تشيك علي التحديث
+// كود قديم اللي تحت افضل منه هي نفش الفكرة
 // function checkUpdateNumber() {
 //     if (localStorage.getItem("update") === null) { 
 //         localStorage.setItem("update", 2);
@@ -573,26 +587,46 @@ function exitWithoutConfirmation() {
 //         window.location.reload();
 //         localStorage.removeItem('temporaryData');
 //         localStorage.setItem("update", 2);
-    
+
 //     } 
 // }
 
 // دالة تشيك علي التحديث
 // ممكن يحل محل الطريقة دي في التحديث وهي query parameters -- ?v=1.0.5">
 
+
+if (localStorage.getItem("appVersion") === null) {
+    localStorage.setItem("appVersion", "1.6.0");
+} 
+else  {
+    checkUpdateNumber()
+}
+
 function checkUpdateNumber() {
-// تعيين نسخة جديدة للتطبيق في localStorage
-const appVersion = '1.5.0';
-const savedVersion = localStorage.getItem('appVersion');
+    // تعيين نسخة جديدة للتطبيق في localStorage
+    const appVersion = '1.6.0';
+    const savedVersion = localStorage.getItem('appVersion');
 
-if (savedVersion !== appVersion) {
- // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
-    alert("تم عمل تحديث للأصدار");
-    window.location.reload();
-    localStorage.removeItem('temporaryData');
-    localStorage.setItem('appVersion', appVersion);  // تحديث بالقيمة الجديدة للأصدار
+    if (savedVersion !== appVersion) {
+        // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
+        alert(" تم تحديث الاصدار - تم تحديث تاب تسابيح  ");
+        window.location.reload();
+        localStorage.removeItem('temporaryData');
+        localStorage.setItem('appVersion', appVersion);  // تحديث بالقيمة الجديدة للأصدار
 
+    }
 }
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
