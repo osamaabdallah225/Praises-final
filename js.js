@@ -215,10 +215,22 @@ const totalCounter = document.querySelector('.total-counter');  // العداد 
 let counts = Array(circles.length).fill(0); // Array to store counts for each circle
 let totalCount = 0; // Total count
 
+// دالة لتحديث border    
+function updateCircleColors() {
+    circles.forEach((circle, index) => {
+        if (counts[index] > 0) {
+            circle.style.border = '2px solid rgb(227 100 15)'; // تغيير لون الحواف إذا كان العداد أكبر من 0
+        } else {
+            circle.style.border = ""; // تارجاع الحواف الي اصلها إذا كان العداد أكبر من 0
+        }
+    });
+}
+
 // عندما يتم النقر على زر العودة
 document.getElementById('back-circle').addEventListener('click', () => {
-document.getElementById('back-circle').classList.add('disactive');   // اخفاء زر العودة
-document.getElementById("icon").style.display = "block";  // اظهار ايقونة التصفير 
+    document.getElementById('back-circle').classList.add('disactive');   // اخفاء زر العودة
+    document.getElementById("icon").style.display = "block";  // اظهار ايقونة التصفير 
+    updateCircleColors(); // تحديث الألوان عند العودة
 });
 
 // إضافة مستمعات الضغط على الدوائر
@@ -227,7 +239,7 @@ circles.forEach((circle, index) => {
         // إذا كانت الدائرة غير نشطة (صغيرة)، قم بتكبيرها فقط
         if (!circle.classList.contains('active')) {
             // إزالة الكلاس 'active' من جميع الدوائر الأخرى
-            // circles.forEach(c => c.classList.remove('active'));
+            circles.forEach(c => c.classList.remove('active'));
 
             // إضافة الكلاس 'active' لهذه الدائرة لجعلها كبيرة
             circle.classList.add('active');
@@ -239,14 +251,12 @@ circles.forEach((circle, index) => {
             if (img[index]) {
                 img[index].style.display = "block";
             }
-
-            // جعل زر الرجوع مرئي
-            document.getElementById('back-circle').classList.remove('disactive');
+            document.getElementById('back-circle').classList.remove('disactive');   // جعل زر الرجوع مرئي
             document.getElementById("icon").style.display = "none";  // اخفاء ايقونة التصفير
         } else {
-            // إذا كانت الدائرة نشطة (كبرت)، زيادة العداد
-            ButtonClick(index); // زيادة العداد فقط إذا كانت نشطة
+            ButtonClick(index); // زيادة العداد فقط إذا كانت نشطة  ---  دالة لزيادة العداد
         }
+
     });
 });
 
@@ -260,6 +270,8 @@ function ButtonClick(index) {
 
     // تحديث العد الكلي في الـ DOM
     totalCounter.innerText = totalCount;
+
+
 }
 
 // دالة لإعادة تعيين الدوائر عندما يتم النقر على زر 'back-circle'
@@ -273,7 +285,7 @@ document.getElementById("icon").addEventListener("click", function () {
     counts.fill(0); // إعادة جميع العدادات إلى 0
     totalCount = 0; // إعادة العد الكلي إلى 0
     totalCounter.innerText = 0;
-
+    updateCircleColors(); // تحديث الألوان عند العودة
     // إعادة تعيين النصوص
     counters.forEach((span) => {
         span.innerText = "0"; // إعادة النص إلى فارغ
@@ -597,8 +609,8 @@ if (window.innerWidth < 600) {
 
 if (localStorage.getItem("appVersion") === null) {
     localStorage.setItem("appVersion", "1.6.0");
-} 
-else  {
+}
+else {
     checkUpdateNumber()
 }
 
