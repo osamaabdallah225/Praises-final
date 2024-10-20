@@ -219,7 +219,7 @@ let totalCount = 0; // Total count
 function updateCircleColors() {
     circles.forEach((circle, index) => {
         if (counts[index] > 0) {
-            circle.style.border = '2px solid rgb(227 100 15)'; // تغيير لون الحواف إذا كان العداد أكبر من 0
+            circle.style.border = '3px solid rgb(227 100 15)'; // تغيير لون الحواف إذا كان العداد أكبر من 0
         } else {
             circle.style.border = ""; // تارجاع الحواف الي اصلها إذا كان العداد أكبر من 0
         }
