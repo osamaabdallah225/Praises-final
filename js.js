@@ -220,7 +220,9 @@ function updateCircleColors() {
     circles.forEach((circle, index) => {
         if (counts[index] > 0) {
             circle.style.border = '3px solid rgb(227 100 15)'; // تغيير لون الحواف إذا كان العداد أكبر من 0
-        } else {
+        }
+
+        else {
             circle.style.border = ""; // تارجاع الحواف الي اصلها إذا كان العداد أكبر من 0
         }
     });
@@ -608,7 +610,7 @@ if (window.innerWidth < 600) {
 
 
 if (localStorage.getItem("appVersion") === null) {
-    localStorage.setItem("appVersion", "1.6.0");
+    localStorage.setItem("appVersion", "1.7.0");
 }
 else {
     checkUpdateNumber()
@@ -616,12 +618,12 @@ else {
 
 function checkUpdateNumber() {
     // تعيين نسخة جديدة للتطبيق في localStorage
-    const appVersion = '1.6.0';
+    const appVersion = '1.7.0';
     const savedVersion = localStorage.getItem('appVersion');
 
     if (savedVersion !== appVersion) {
         // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
-        alert(" تم تحديث الاصدار - تم تحديث تاب تسابيح  ");
+        // alert(" تم تحديث الاصدار  ");
         window.location.reload();
         localStorage.removeItem('temporaryData');
         localStorage.setItem('appVersion', appVersion);  // تحديث بالقيمة الجديدة للأصدار

@@ -403,6 +403,7 @@ ul li {
     margin-top: -3px;
     margin-left: -3px;
    user-select: none;
+   border: none !important;
    
 }
 
