@@ -526,6 +526,16 @@ if (window.innerWidth < 600) {
         });
     });
 
+
+    // إضافة مستمع لحدث الضغط على زر "menuIcon"
+
+    // إضافة مستمع للنقر على الأزرار داخل main-content1 و main-content2
+    document.querySelectorAll('.button-sub').forEach(function (button) {
+        button.addEventListener('click', function () {
+            actionOccurredOnSubButton = true; // تم النقر على زر من الفئة button-sub
+        });
+    });
+
     // إضافة مستمع لحدث الضغط على زر "menuIcon"
     document.getElementById("menuIcon").addEventListener("click", function () {
         document.getElementById("menuIcon").style.display = 'none';
@@ -537,17 +547,35 @@ if (window.innerWidth < 600) {
         // إذا لم يحدث أي نشاط على الأزرار الفرعية يتم الخروج مباشرة بدون رسالة
         if (noActionOccurred || finished) {
             exitWithoutConfirmation();
-        } else {
-            // إذا تم النقر على زر من فئة button-sub، نسأل المستخدم ما إذا كان يريد الخروج
-            const userConfirmed = confirm("تم البدء في قراءة الذكر. هل تريد الخروج ؟");
-            if (userConfirmed === true) {
-                exitWithoutConfirmation();
-            } else {
-                // إعادة عرض القائمة إذا لم يؤكد المستخدم الخروج
-                document.getElementById("menuIcon").style.display = 'block';
-            }
         }
-    });
+
+        else {
+            document.getElementById("messagecontainer").style.display = "block"; // أظهار مربع الرسالة
+            document.getElementById("overlay").style.display = "block";  // أظهار الشاشة الخلفية
+            document.body.style.overflow = 'hidden'; // منع التمرير
+
+
+            // عند الضغط علي زر موافق
+            document.getElementById("ok").addEventListener("click", function () {
+
+                exitWithoutConfirmation();
+                document.getElementById("messagecontainer").style.display = "none"; // اخفاء مربع الرسالة
+                document.getElementById("overlay").style.display = "none";   // اخفاء الشاشة الخلفية
+                document.body.style.overflow = 'scroll'; //  التمرير
+            });
+            // عند النقر علي زر الغاء
+            document.getElementById("cancel").addEventListener("click", function () {
+
+                document.getElementById("menuIcon").style.display = 'block';
+                document.getElementById("messagecontainer").style.display = "none"; // اخفاء مربع الرسالة
+                document.getElementById("overlay").style.display = "none";   // اخفاء الشاشة الخلفية
+                document.body.style.overflow = 'scroll'; //  التمرير
+            })
+        }
+    }
+    );
+
+
 
     // دالة لتنفيذ الخروج بدون رساله تأكيد
     function exitWithoutConfirmation() {
@@ -610,7 +638,7 @@ if (window.innerWidth < 600) {
 
 
 if (localStorage.getItem("appVersion") === null) {
-    localStorage.setItem("appVersion", "1.7.0");
+    localStorage.setItem("appVersion", "1.8.0");
 }
 else {
     checkUpdateNumber()
@@ -618,13 +646,24 @@ else {
 
 function checkUpdateNumber() {
     // تعيين نسخة جديدة للتطبيق في localStorage
-    const appVersion = '1.7.0';
+    const appVersion = '1.8.0';
     const savedVersion = localStorage.getItem('appVersion');
 
     if (savedVersion !== appVersion) {
         // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
         // alert(" تم تحديث الاصدار  ");
-        window.location.reload();
+        // إظهار الرسالة
+        document.getElementById("messageupdate").style.display = "block";
+
+        document.getElementById("overlay").style.display = "block";   // اخفاء الشاشة الخلفية
+        document.body.style.overflow = 'hidden'; //  التمرير
+
+        // عند النقر على زر "موافق" يتم إخفاء الرسالة
+        document.getElementById("ok-update").addEventListener("click", function () {
+            document.getElementById("messageupdate").style.display = "none";
+            window.location.reload();
+        });
+
         localStorage.removeItem('temporaryData');
         localStorage.setItem('appVersion', appVersion);  // تحديث بالقيمة الجديدة للأصدار
 
