@@ -123,6 +123,14 @@ buttonDivs.forEach((el, divIndex) => {
                 if (buttonDivs[divIndex].querySelectorAll('.button-sub').length === zeroCounts[divIndex]) {
                     setTimeout(() => {
                         document.getElementById("finished").style.display = 'block'; // أظهار رسالة الانتهاء من الذكر
+                        
+                        congratulation() // دالة انزال الورد عند الانتهاء من الذكر
+                        // الضغط علي اي مكان في الشاشة عند ظهور الرساله عشان كده مدي بادينج 90 % للرساله
+                        finished.addEventListener('click', ()=>{
+                            document.getElementById("menuIcon").style.display = 'none';
+                            exitWithoutConfirmation();
+                            clearInterval(repeater);
+                        });
 
                     }, 800)
                 }
@@ -131,6 +139,7 @@ buttonDivs.forEach((el, divIndex) => {
         });
     });
 });
+
 
 // حساب النسبة المئوية بناءً على عدد الأزرار التي وصلت إلى صفر في هذا div
 function calculatePercentage(divIndex) {
@@ -539,6 +548,7 @@ if (window.innerWidth < 600) {
     // إضافة مستمع لحدث الضغط على زر "menuIcon"
     document.getElementById("menuIcon").addEventListener("click", function () {
         document.getElementById("menuIcon").style.display = 'none';
+        clearInterval(repeater);   // ايقاف نزول التهنئة
         // نتحقق إذا كانت الأذكار قد انتهت
         const finished = document.getElementById("finished").style.display !== 'none';
         // نتحقق مما إذا حدث أي نشاط على زر من الفئة button-sub
@@ -638,7 +648,7 @@ if (window.innerWidth < 600) {
 
 
 if (localStorage.getItem("appVersion") === null) {
-    localStorage.setItem("appVersion", "1.8.0");
+    localStorage.setItem("appVersion", "1.9.0");
 }
 else {
     checkUpdateNumber()
@@ -646,7 +656,7 @@ else {
 
 function checkUpdateNumber() {
     // تعيين نسخة جديدة للتطبيق في localStorage
-    const appVersion = '1.8.0';
+    const appVersion = '1.9.0';
     const savedVersion = localStorage.getItem('appVersion');
 
     if (savedVersion !== appVersion) {
@@ -670,8 +680,37 @@ function checkUpdateNumber() {
     }
 }
 
+// دالة انزال الورد عند الانتهاء من الذكر
+function congratulation() {
 
-
+        repeater = setInterval(() => {
+           const floor = document.createElement("div");
+           floor.innerHTML = "&#127880";
+           floor.classList.add("floor");
+           containerFloor.append(floor);
+           floor.style.left = `${Math.random() * 100}%`;
+   
+           const floor2 = document.createElement("div");
+           floor2.innerHTML = "	&#128151";
+           floor2.classList.add("floor");
+           containerFloor.append(floor2);
+           floor2.style.left = `${Math.random() * 100}%`;
+   
+           const floor3 = document.createElement("div");
+           floor3.innerHTML = "&#127804";
+           floor3.classList.add("floor");
+           containerFloor.append(floor3);
+           floor3.style.left = `${Math.random() * 100}%`;
+           
+       },100)
+   
+   
+   
+   setTimeout(() => {
+       clearInterval(repeater);
+   }, 4000)
+    
+}
 
 
 

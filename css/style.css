@@ -331,6 +331,7 @@ ul li {
     font-size: 25px;
     width: 90%;
     text-align: center;
+    padding: 90% 0px 90% 0px;
 
   }
 
@@ -493,4 +494,27 @@ ul li {
     display: none;
     z-index: 1;
 }
+/* دالة انزال الورد عند الانتهاء من الذكر */
 
+.floor {
+    font-size: 28px;
+    animation: ev 1.5s 1 linear forwards ;
+    position: fixed;
+    top: 0px;
+    
+    
+}
+@keyframes ev {
+    0% {
+        transform:translate(0px, 0px);
+        transform:scale(1.2, 1.5);
+    }
+  
+    100% {
+        transform:translate(0px, 120vh);
+       
+        
+    }
+}
+
+/* دالة انزال الورد عند الانتهاء من الذكر */
