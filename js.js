@@ -681,6 +681,7 @@ function checkUpdateNumber() {
 }
 
 // دالة انزال الورد عند الانتهاء من الذكر
+let repeater;
 function congratulation() {
 
         repeater = setInterval(() => {
@@ -702,13 +703,13 @@ function congratulation() {
            containerFloor.append(floor3);
            floor3.style.left = `${Math.random() * 100}%`;
            
-       },100)
+       },300)
    
    
    
    setTimeout(() => {
        clearInterval(repeater);
-   }, 4000)
+   }, 3000)
     
 }
 
