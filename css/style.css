@@ -51,6 +51,7 @@ body {
      } 
      #finished {
       top: 50% !important;
+      padding: 90% 0px 90% 0px;
       }
 
 
@@ -331,7 +332,7 @@ ul li {
     font-size: 25px;
     width: 90%;
     text-align: center;
-    padding: 90% 0px 90% 0px;
+   
 
   }
 
@@ -498,9 +499,14 @@ ul li {
 
 .floor {
     font-size: 28px;
-    animation: ev 1.5s 1 linear forwards ;
+    animation: ev 1 linear forwards ;
+    /* animation-duration: 1.5s;
+    animation-name: ev;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;animation-timing-function: linear; */
     position: fixed;
     top: 0px;
+   
     
     
 }

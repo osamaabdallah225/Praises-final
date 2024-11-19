@@ -123,10 +123,10 @@ buttonDivs.forEach((el, divIndex) => {
                 if (buttonDivs[divIndex].querySelectorAll('.button-sub').length === zeroCounts[divIndex]) {
                     setTimeout(() => {
                         document.getElementById("finished").style.display = 'block'; // أظهار رسالة الانتهاء من الذكر
-                        
+
                         congratulation() // دالة انزال الورد عند الانتهاء من الذكر
                         // الضغط علي اي مكان في الشاشة عند ظهور الرساله عشان كده مدي بادينج 90 % للرساله
-                        finished.addEventListener('click', ()=>{
+                        finished.addEventListener('click', () => {
                             document.getElementById("menuIcon").style.display = 'none';
                             exitWithoutConfirmation();
                             clearInterval(repeater);
@@ -648,7 +648,7 @@ if (window.innerWidth < 600) {
 
 
 if (localStorage.getItem("appVersion") === null) {
-    localStorage.setItem("appVersion", "1.9.0");
+    localStorage.setItem("appVersion", "1.0.1");
 }
 else {
     checkUpdateNumber()
@@ -656,14 +656,13 @@ else {
 
 function checkUpdateNumber() {
     // تعيين نسخة جديدة للتطبيق في localStorage
-    const appVersion = '1.9.0';
+    const appVersion = '1.0.1';
     const savedVersion = localStorage.getItem('appVersion');
 
     if (savedVersion !== appVersion) {
-        // مسح البيانات المؤقتة أو الكاش الخاص بالتطبيق فقط (وليس كل localStorage)
-        // alert(" تم تحديث الاصدار  ");
+
         // إظهار الرسالة
-        document.getElementById("messageupdate").style.display = "block";
+        // document.getElementById("messageupdate").style.display = "block";
 
         document.getElementById("overlay").style.display = "block";   // اخفاء الشاشة الخلفية
         document.body.style.overflow = 'hidden'; //  التمرير
@@ -680,37 +679,55 @@ function checkUpdateNumber() {
     }
 }
 
+
+
+
 // دالة انزال الورد عند الانتهاء من الذكر
 let repeater;
 function congratulation() {
 
-        repeater = setInterval(() => {
-           const floor = document.createElement("div");
-           floor.innerHTML = "&#127880";
-           floor.classList.add("floor");
-           containerFloor.append(floor);
-           floor.style.left = `${Math.random() * 100}%`;
-   
-           const floor2 = document.createElement("div");
-           floor2.innerHTML = "	&#128151";
-           floor2.classList.add("floor");
-           containerFloor.append(floor2);
-           floor2.style.left = `${Math.random() * 100}%`;
-   
-           const floor3 = document.createElement("div");
-           floor3.innerHTML = "&#127804";
-           floor3.classList.add("floor");
-           containerFloor.append(floor3);
-           floor3.style.left = `${Math.random() * 100}%`;
-           
-       },300)
-   
-   
-   
-   setTimeout(() => {
-       clearInterval(repeater);
-   }, 3000)
-    
+    const removeContainer = document.createElement("div");  // هيتم وضع بها القلوب وبعدين هيتم حذفة بعد مدة زمنية معينه
+    containerFloor.append(removeContainer);
+
+    repeater = setInterval(() => {
+        const floor = document.createElement("div");
+        floor.innerHTML = "&#128155";
+        floor.classList.add("floor");
+        removeContainer.append(floor);
+        floor.style.left = `${Math.random() * 90}%`;
+        floor.style.animationDirection = `1s`;
+        //  تغيير مدة الحركة بشكل عشوائي
+        floor.style.animationDuration = `${(Math.random() * 0.8) + 1.5}s`;
+
+        const floor2 = document.createElement("div");
+        floor2.innerHTML = "&#128151";
+        floor2.classList.add("floor");
+        removeContainer.append(floor2);
+        floor2.style.left = `${Math.random() * 90}%`;
+        floor2.style.animationDirection = `1s`;
+        //  تغيير مدة الحركة بشكل عشوائي
+        floor2.style.animationDuration = `${(Math.random() * 0.8) + 1.5}s`;
+
+        const floor3 = document.createElement("div");
+        floor3.innerHTML = "&#128154";
+        floor3.classList.add("floor");
+        removeContainer.append(floor3);
+        floor3.style.left = `${Math.random() * 90}%`;
+        //  تغيير مدة الحركة بشكل عشوائي
+        floor3.style.animationDuration = `${(Math.random() * 0.8) + 1.5}s`;
+
+    }, 200)
+
+
+    // بعد 3 ثواني يتم الانتهاء من الورد
+    setTimeout(() => {
+        clearInterval(repeater);
+    }, 2000)
+    // حذف جميع العناصر اللي تم اضافتها بعد 5 ثواتي 
+    setTimeout(() => {
+        removeContainer.remove();
+    }, 5000)
+
 }
 
 
