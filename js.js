@@ -275,6 +275,10 @@ circles.forEach((circle, index) => {
 function ButtonClick(index) {
     counts[index]++; // زيادة العداد لهذه الدائرة
     totalCount++; // زيادة العد الكلي
+    if (counts[index] == 100 && counts[index] == 500 && counts[index] == 1000) {
+        congratulation();   // دالة انزال القلوب
+
+    }
 
     // تحديث العداد الفردي في الـ DOM
     counters[index].innerText = counts[index];
@@ -682,7 +686,7 @@ function checkUpdateNumber() {
 
 
 
-// دالة انزال الورد عند الانتهاء من الذكر
+// دالة انزال القلوب 
 let repeater;
 function congratulation() {
 
