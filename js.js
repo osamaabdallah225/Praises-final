@@ -648,7 +648,7 @@ if (window.innerWidth < 600) {
 
 
 if (localStorage.getItem("appVersion") === null) {
-    localStorage.setItem("appVersion", "1.0.1");
+    localStorage.setItem("appVersion", "1.0.2");
 }
 else {
     checkUpdateNumber()
@@ -656,7 +656,7 @@ else {
 
 function checkUpdateNumber() {
     // تعيين نسخة جديدة للتطبيق في localStorage
-    const appVersion = '1.0.1';
+    const appVersion = '1.0.2';
     const savedVersion = localStorage.getItem('appVersion');
 
     if (savedVersion !== appVersion) {
@@ -664,8 +664,8 @@ function checkUpdateNumber() {
         // إظهار الرسالة
         // document.getElementById("messageupdate").style.display = "block";
 
-        document.getElementById("overlay").style.display = "block";   // اخفاء الشاشة الخلفية
-        document.body.style.overflow = 'hidden'; //  التمرير
+        // document.getElementById("overlay").style.display = "block";   // اخفاء الشاشة الخلفية
+        // document.body.style.overflow = 'hidden'; //  التمرير
 
         // عند النقر على زر "موافق" يتم إخفاء الرسالة
         document.getElementById("ok-update").addEventListener("click", function () {
