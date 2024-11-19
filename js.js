@@ -700,7 +700,7 @@ function congratulation() {
         floor.style.animationDuration = `${(Math.random() * 0.8) + 1.5}s`;
 
         const floor2 = document.createElement("div");
-        floor2.innerHTML = "&#128151";
+        floor2.innerHTML = "&#128156";
         floor2.classList.add("floor");
         removeContainer.append(floor2);
         floor2.style.left = `${Math.random() * 90}%`;
@@ -715,6 +715,7 @@ function congratulation() {
         floor3.style.left = `${Math.random() * 90}%`;
         //  تغيير مدة الحركة بشكل عشوائي
         floor3.style.animationDuration = `${(Math.random() * 0.8) + 1.5}s`;
+
 
     }, 200)
 
